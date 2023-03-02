@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Aula Ionic
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- apresentar página de css #container -->
+  <div id="container">
+
+    <!-- componente button -->
+    <!-- utilize routerLink para implementar a navegação entre páginas -->
+    <ion-button color="primary" routerLink="/grid1">
+      <ion-icon slot="end" name="airplane-outline"></ion-icon>
+      Grid 1
+    </ion-button>
+
+    <ion-button color="success" routerLink="/grid2">
+      <ion-icon slot="end" name="bug-sharp"></ion-icon>
+      Grid 2
+    </ion-button>
+
+    <ion-button color="warning" routerLink="/form">
+      <ion-icon slot="end" name="alarm-outline"></ion-icon>
+      Form 1
+    </ion-button>
+
+    <ion-button color="danger" routerLink="/form2">
+      <ion-icon slot="end" name="battery-full-outline"></ion-icon>
+      Form 2
+    </ion-button>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="addAluno('pedro','herique',1)" expand="full" color="success">Add</ion-button>
+      </ion-col>
+
+      <ion-col size="6">
+        <ion-button (click)="printAluno()" expand="full" color="warning">Show</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
