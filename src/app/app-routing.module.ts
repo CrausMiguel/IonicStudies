@@ -29,6 +29,10 @@ const routes: Routes = [
     path: 'form2',
     loadChildren: () => import('./form2/form2.module').then( m => m.Form2PageModule)
   },
+  {
+    path: 'ng-pge',
+    loadChildren: () => import('./ng-pge/ng-pge.module').then( m => m.NgPgePageModule)
+  },
 
 ];
 
