@@ -33,6 +33,10 @@ const routes: Routes = [
     path: 'ng-pge',
     loadChildren: () => import('./ng-pge/ng-pge.module').then( m => m.NgPgePageModule)
   },
+  {
+    path: 'movies',
+    loadChildren: () => import('./movies/movies.module').then( m => m.MoviesPageModule)
+  },
 
 ];
 
