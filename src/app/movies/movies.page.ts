@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonReorderGroup, PopoverController } from '@ionic/angular';
+import { ShowSinopseComponent } from '../show-sinopse/show-sinopse.component';
 
 @Component({
   selector: 'app-movies',
@@ -21,7 +22,7 @@ export class MoviesPage implements OnInit {
     {cod: 4, titulo: 'Adoráveis Mulheres',    sinopse: 'As irmãs Jo (Saoirse Ronan), Beth (Eliza Scanlen), Meg (Emma Watson) e Amy (Florence Pugh) amadurecem na virada da adolescência para a vida adulta enquanto os Estados Unidos atravessam a Guerra Civil. Com personalidades completamente diferentes, elas enfrentam os desafios de crescer unidas pelo amor que nutrem umas pelas outras.',  ano: 2020, status: true, visible: true, adicionado: false},
     {cod: 5, titulo: 'Troco em Dobro',        sinopse: 'Na trama de Troco em Dobro, Spenser (Mark Wahlberg), um ex-policial mais conhecido por causar problemas do que resolvê-los, acabou de sair da prisão. Mas ele se vê obrigado a ajudar seu antigo treinador de boxe Henry (Alan Arkin) e permanece na cidade de Boston mesmo com a intenção de ir embora. Quando dois ex-colegas de Spenser são assassinados, ele recruta Hawk (Winston Duke), um lutador de MMA, para ajudá-lo a investigar e levar os culpados à justiça.',  ano: 2020, status: true, visible: true, adicionado: false},
     {cod: 6, titulo: 'Mulher Maravilha 1984', sinopse: 'Mulher-Maravilha 1984 acompanha Diana Prince/Mulher-Maravilha (Gal Gadot) em 1984, durante a Guerra Fria, entrando em conflito com dois grande inimigos - o empresário de mídia Maxwell Lord (Pedro Pascal) e a amiga que virou inimiga Barbara Minerva/Cheetah (Kristen Wiig) - enquanto se reúne com seu interesse amoroso Steve Trevor (Chris Pine).',   ano: 2020, status: true, visible: true, adicionado: false},
-    {cod: 7, titulo: 'King\'s Man: a origem', sinopse: 'Em King’s Man: A Origem, quando um grupo formado pelos piores tiranos e criminosos mais cruéis de todos os tempos planeja uma ameaça capaz de matar milhões de inocentes, um homem é obrigado a correr contra o tempo na tentativa de salvar o futuro da humanidade.', ano: 2021, status: false, visible: true, adicionado: false}
+    {cod: 7, titulo: 'King\'s Man: a origem', sinopse: 'Em King’s Man: A Origem, quando um grupo formado pelos piores tiranos e criminosos mais cruéis de todos os tempos planeja uma ameaça capaz de matar milhões de inocentes, um homem é obrigado a correr contra o tempo na tentativa de salvar o futuro da humanidade.', ano: 2021, status: true, visible: true, adicionado: false}
   ]
 
   public moviesAss = []
@@ -34,11 +35,26 @@ export class MoviesPage implements OnInit {
     return str.substring(0, limit) + '...'
   }
 
-  addMovieAss(an:any){
-    an.adicionado = true;
+  async showSinopse(event:any, sinopse:string) {
+    let popover = await this.popoverController.create({
+      component: ShowSinopseComponent,
+      componentProps: {sinopse: sinopse},
+      cssClass: 'my-custom-class',
+      event: event,
+      translucent: true
+    })
+
+    popover.present()
   }
 
-  removeMovieAss(an:any){
-    an.adicionado = false;
+  addMovieAss(movie:any){
+    movie.adicionado = true;
+    this.moviesAss.push(movie)
+  }
+
+  removeMovieAss(movie:any){
+    movie.adicionado = false;
+    let ix = this.moviesAss.findIndex((el:any) => el.cod == movie.cod)
+    this.moviesAss.splice(ix, 1)
   }
 }
